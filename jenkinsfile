@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('clone git repo') {
             steps {
-                sh 'git branch: 'main', url: 'https://github.com/gopalthakur71/python-pro.git'
+                git branch: 'main', url: 'https://github.com/gopalthakur71/python-pro.git'
             }
         }
     stage('Build images') {
@@ -23,4 +23,3 @@ pipeline {
     }
     }
 }
-
