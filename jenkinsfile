@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') { 
+            steps {
+                sh '''
+                sudo docker build -t app:v1.2.0 /home/ubuntu/jenkins/workspace/configuration
+                sudo docker run -it -d -p 82:5000 app:v1.2.0
+                '''
+                
+            }
+        }
+    }
+}
+
