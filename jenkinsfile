@@ -1,15 +1,26 @@
 pipeline {
     agent any
+
     stages {
-        stage('Build') { 
+        stage('clone git repo') {
             steps {
-                sh '''
-                sudo docker build -t app:v1.2.0 /home/ubuntu/jenkins/workspace/configuration
-                sudo docker run -it -d -p 82:5000 app:v1.2.0
-                '''
+                sh 'git branch: 'main', url: 'https://github.com/gopalthakur71/python-pro.git'
+            }
+        }
+    stage('Build images') {
+            steps {
+                sh 'sudo docker build -t app:v1.2.0 /home/ubuntu/jenkins/workspace/configuration'
+                
+                
                 
             }
         }
+    stage ('Run the image') {
+        steps {
+            sh 'sudo docker rm -f $(sudo docker ps -a -q)'
+            sh 'sudo docker run -it -d -p 82:5000 app:v1.2.0 '
+        }
+    }
     }
 }
 
